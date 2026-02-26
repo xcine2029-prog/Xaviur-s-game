@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://grp8kjg7by24"]
+
+[ext_resource type="Script" uid="uid://blesf8h8mo1ch" path="res://character_select.gd" id="1_5duen"]
+[ext_resource type="Texture2D" uid="uid://dtihte7hquxhw" path="res://sprites/NEW BUTTONS.png" id="2_6yhuy"]
+[ext_resource type="Texture2D" uid="uid://b5q4uoos4yrfl" path="res://sprites/characters.png" id="3_6yhuy"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_aoibv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aoibv"]
+texture = ExtResource("2_6yhuy")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+0:2/size_in_atlas = Vector2i(2, 2)
+0:2/0 = 0
+2:2/size_in_atlas = Vector2i(2, 2)
+2:2/0 = 0
+0:4/size_in_atlas = Vector2i(2, 2)
+0:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mn8d4"]
+texture = ExtResource("3_6yhuy")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+4:0/size_in_atlas = Vector2i(2, 2)
+4:0/0 = 0
+6:0/size_in_atlas = Vector2i(2, 2)
+6:0/0 = 0
+0:2/size_in_atlas = Vector2i(2, 2)
+0:2/0 = 0
+2:2/size_in_atlas = Vector2i(2, 2)
+2:2/0 = 0
+4:2/size_in_atlas = Vector2i(2, 2)
+4:2/0 = 0
+6:2/size_in_atlas = Vector2i(2, 2)
+6:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mn8d4"]
+sources/0 = SubResource("TileSetAtlasSource_aoibv")
+sources/1 = SubResource("TileSetAtlasSource_mn8d4")
+
+[node name="character select" type="Node2D"]
+script = ExtResource("1_5duen")
+
+[node name="button manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="sukuna" type="Button" parent="button manager"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 157.0
+offset_right = 176.55573
+offset_bottom = 191.03639
+scale = Vector2(2.1541967, 5.842164)
+text = "
+"
+
+[node name="shiki" type="Button" parent="button manager"]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 156.99998
+offset_right = 428.55573
+offset_bottom = 191.03638
+scale = Vector2(2.1541967, 5.842164)
+text = "
+"
+
+[node name="david" type="Button" parent="button manager"]
+layout_mode = 0
+offset_left = 587.0
+offset_top = 156.99998
+offset_right = 683.5557
+offset_bottom = 191.03638
+scale = Vector2(2.1541967, 5.842164)
+text = "
+"
+
+[node name="yixuan" type="Button" parent="button manager"]
+layout_mode = 0
+offset_left = 837.0
+offset_top = 156.99998
+offset_right = 933.5557
+offset_bottom = 191.03638
+scale = Vector2(2.1541967, 5.842164)
+text = "
+"
+icon = SubResource("ImageTexture_aoibv")
+
+[node name="TileMap" type="TileMap" parent="button manager"]
+position = Vector2(-57, 11)
+scale = Vector2(6, 6)
+tile_set = SubResource("TileSet_mn8d4")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(131074, 1, 0)
+
+[node name="TileMap2" type="TileMap" parent="button manager"]
+position = Vector2(198, 3)
+scale = Vector2(6, 6)
+tile_set = SubResource("TileSet_mn8d4")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(131074, 262145, 0)
+
+[node name="TileMap3" type="TileMap" parent="button manager"]
+position = Vector2(451, -1)
+scale = Vector2(6, 6)
+tile_set = SubResource("TileSet_mn8d4")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(131074, 1, 2)
+
+[node name="TileMap4" type="TileMap" parent="button manager"]
+position = Vector2(708, 20)
+scale = Vector2(6, 6)
+tile_set = SubResource("TileSet_mn8d4")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(131074, 262145, 2)
