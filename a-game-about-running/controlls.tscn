@@ -1,0 +1,104 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxu5ux563fxrn"]
+
+[ext_resource type="Script" uid="uid://d1i08ub3jykra" path="res://controlls.gd" id="1_e5r78"]
+[ext_resource type="FontFile" uid="uid://b5y0urw48m3ho" path="res://fonts/Kenney Pixel.ttf" id="1_o4hj3"]
+[ext_resource type="Texture2D" uid="uid://dtihte7hquxhw" path="res://sprites/NEW BUTTONS.png" id="2_bef2c"]
+[ext_resource type="AudioStream" uid="uid://c3xcucf8fw3x4" path="res://input or something.mp3" id="3_bef2c"]
+[ext_resource type="Texture2D" uid="uid://bnv3q8k57g707" path="res://sprites/NEW BUTTONS 2.png" id="3_jnre0"]
+
+[sub_resource type="Theme" id="Theme_t6b0w"]
+default_font = ExtResource("1_o4hj3")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jd5nw"]
+texture = ExtResource("2_bef2c")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+0:2/size_in_atlas = Vector2i(2, 2)
+0:2/0 = 0
+2:2/size_in_atlas = Vector2i(2, 2)
+2:2/0 = 0
+0:4/size_in_atlas = Vector2i(2, 2)
+0:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eeplm"]
+texture = ExtResource("3_jnre0")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+0:2/size_in_atlas = Vector2i(2, 2)
+0:2/0 = 0
+2:2/size_in_atlas = Vector2i(2, 2)
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6i6nt"]
+sources/0 = SubResource("TileSetAtlasSource_jd5nw")
+sources/1 = SubResource("TileSetAtlasSource_eeplm")
+
+[node name="controlls" type="Node2D"]
+script = ExtResource("1_e5r78")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 200.0
+offset_bottom = 30.0
+scale = Vector2(5.755, 5.755)
+theme = SubResource("Theme_t6b0w")
+text = "controlls"
+fit_content = true
+tab_size = 8
+horizontal_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 171.0
+offset_top = 99.0
+offset_right = 371.0
+offset_bottom = 207.0
+scale = Vector2(4, 4)
+theme = SubResource("Theme_t6b0w")
+text = "left = a
+right = d
+jump = w
+crouch  = s
+zoom = z
+zoom out = x
+sprint = shift
+
+tip: hold w against a wall to wall jump"
+fit_content = true
+tab_size = 8
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="RichTextLabel2"]
+stream = ExtResource("3_bef2c")
+volume_db = 0.7
+autoplay = true
+
+[node name="button manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 432.0
+offset_top = 358.0
+offset_right = 472.0
+offset_bottom = 398.0
+
+[node name="back to menu" type="Button" parent="button manager"]
+layout_mode = 0
+offset_left = -397.0
+offset_top = -314.0
+offset_right = -325.0
+offset_bottom = -283.0
+scale = Vector2(2.9534416, 4.0183883)
+text = "controls"
+icon_alignment = 1
+
+[node name="TileMap" type="TileMap" parent="button manager/back to menu"]
+position = Vector2(15.57505, -0.497715)
+scale = Vector2(2.53941, 1.8664197)
+tile_set = SubResource("TileSet_6i6nt")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 131073, 0)
+
+[connection signal="pressed" from="button manager/back to menu" to="." method="_on_back_to_menu_pressed"]

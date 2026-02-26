@@ -1,0 +1,186 @@
+[gd_scene load_steps=15 format=3 uid="uid://ckargkj3ivooh"]
+
+[ext_resource type="Script" uid="uid://c2h2yd5v0yf1w" path="res://start.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://dtihte7hquxhw" path="res://sprites/NEW BUTTONS.png" id="2_fu7sn"]
+[ext_resource type="FontFile" uid="uid://byvtwaj5jg357" path="res://fonts/BridgeParapet.ttf" id="3_fu7sn"]
+[ext_resource type="Script" uid="uid://iieacw3kggsc" path="res://static_body_2d.gd" id="3_glbon"]
+[ext_resource type="Texture2D" uid="uid://c2h5rt4iic08q" path="res://sprites/human.png" id="4_nlkkf"]
+[ext_resource type="AudioStream" uid="uid://bnfrwtljdebk8" path="res://a humans theme.mp3" id="6_nlkkf"]
+
+[sub_resource type="Theme" id="Theme_jix8l"]
+default_font = ExtResource("3_fu7sn")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe12f"]
+atlas = ExtResource("4_nlkkf")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qtwp"]
+atlas = ExtResource("4_nlkkf")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy7ct"]
+atlas = ExtResource("4_nlkkf")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o4t1"]
+atlas = ExtResource("4_nlkkf")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0k4wn"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qe12f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qtwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy7ct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o4t1")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 15.0
+}]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7vrkn"]
+texture = ExtResource("2_fu7sn")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+0:2/size_in_atlas = Vector2i(2, 2)
+0:2/0 = 0
+2:2/size_in_atlas = Vector2i(2, 2)
+2:2/0 = 0
+0:4/size_in_atlas = Vector2i(2, 2)
+0:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jix8l"]
+sources/0 = SubResource("TileSetAtlasSource_7vrkn")
+
+[node name="main menu" type="Node2D"]
+script = ExtResource("1_06t4h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 357.00003
+offset_top = 86.0
+offset_right = 457.00003
+offset_bottom = 114.0
+scale = Vector2(7.5, 7.5)
+theme = SubResource("Theme_jix8l")
+theme_override_font_sizes/bold_font_size = 20
+text = "crosseries
+combat
+"
+fit_content = true
+tab_size = 8
+horizontal_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 458.00006
+offset_top = 415.00003
+offset_right = 558.00006
+offset_bottom = 463.00003
+scale = Vector2(5, 5)
+theme = SubResource("Theme_jix8l")
+text = "made by:
+xavier"
+fit_content = true
+tab_size = 8
+horizontal_alignment = 1
+
+[node name="guy" type="CharacterBody2D" parent="."]
+position = Vector2(25, 567)
+script = ExtResource("3_glbon")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="guy"]
+position = Vector2(678, -231.00002)
+scale = Vector2(7, 7)
+sprite_frames = SubResource("SpriteFrames_0k4wn")
+animation = &"new_animation"
+
+[node name="wait1" type="Timer" parent="guy"]
+wait_time = 5.0
+autostart = true
+
+[node name="button manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="start" type="Button" parent="button manager"]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 148.00002
+offset_right = 282.55573
+offset_bottom = 182.0364
+scale = Vector2(2.1541967, 3.4668767)
+text = "start
+"
+
+[node name="controls" type="Button" parent="button manager"]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 289.0
+offset_right = 255.0
+offset_bottom = 320.0
+scale = Vector2(2.9534416, 4.0183883)
+text = "controls"
+icon_alignment = 1
+
+[node name="quit" type="Button" parent="button manager"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 457.0
+offset_right = 227.60133
+offset_bottom = 504.24908
+scale = Vector2(4.1859384, 2.6878822)
+text = "quit"
+
+[node name="TileMap" type="TileMap" parent="button manager"]
+position = Vector2(228.00003, 145)
+scale = Vector2(7.5, 7.5)
+tile_set = SubResource("TileSet_jix8l")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0)
+
+[node name="TileMap2" type="TileMap" parent="button manager"]
+position = Vector2(228.00003, 295.00003)
+scale = Vector2(7.5, 7.5)
+tile_set = SubResource("TileSet_jix8l")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 131072, 0)
+
+[node name="TileMap3" type="TileMap" parent="button manager"]
+position = Vector2(225, 459.00003)
+scale = Vector2(7.5, 7.5)
+tile_set = SubResource("TileSet_jix8l")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 2)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(542, 343)
+zoom = Vector2(1.2, 1.2)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_nlkkf")
+volume_db = 0.7
+autoplay = true
+
+[connection signal="timeout" from="guy/wait1" to="guy" method="_on_wait_1_timeout"]
+[connection signal="pressed" from="button manager/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="button manager/controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="button manager/quit" to="." method="_on_quit_pressed"]
