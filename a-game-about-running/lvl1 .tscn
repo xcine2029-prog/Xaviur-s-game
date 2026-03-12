@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=4 uid="uid://db83hqhfia5l2"]
+[gd_scene load_steps=115 format=4 uid="uid://db83hqhfia5l2"]
 
 [ext_resource type="Script" uid="uid://bfrcotw3g1jke" path="res://character_body_2d.gd" id="1_2221x"]
 [ext_resource type="Texture2D" uid="uid://dct3oh8b1745b" path="res://sprites/backround.png" id="1_pjawx"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://s4mmeb4ir3lk" path="res://sprites/i think its the floor  (4).png" id="13_lwbt2"]
 [ext_resource type="Texture2D" uid="uid://djdqxk51hbtx6" path="res://sprites/water n stuff.png" id="13_pnumx"]
 [ext_resource type="Texture2D" uid="uid://dqplgroodaavt" path="res://sprites/human 2.png" id="14_8phyn"]
+[ext_resource type="Script" uid="uid://cji8hunpw2tgu" path="res://right_hitbox.gd" id="17_2yp5d"]
 [ext_resource type="Script" uid="uid://dvvcu65f57ii" path="res://collision_shape_2d.gd" id="17_s1xs0"]
 [ext_resource type="PackedScene" uid="uid://b3shhqwlb4kjs" path="res://kill_area.tscn" id="18_8phyn"]
 [ext_resource type="AudioStream" uid="uid://dkrmscyjy53sc" path="res://no_way_back.mp3" id="21_56swm"]
@@ -208,8 +209,8 @@ texture = ExtResource("13_lwbt2")
 0:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_4d7sh"]
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_layer = 7
+physics_layer_0/collision_mask = 7
 sources/3 = SubResource("TileSetAtlasSource_ir8iy")
 sources/5 = SubResource("TileSetAtlasSource_fyi7x")
 sources/7 = SubResource("TileSetAtlasSource_uf3n7")
@@ -866,9 +867,9 @@ tile_map_data = PackedByteArray("AAA6APv/BwACAAEAAFA7APv/BwACAAEAAFA8APv/BwACAAE
 tile_set = SubResource("TileSet_4d7sh")
 
 [node name="scrib" type="CharacterBody2D" parent="."]
-position = Vector2(-1425, 360)
+position = Vector2(6585, 165)
 scale = Vector2(0.13192625, 0.12981638)
-collision_layer = 3
+collision_mask = 5
 script = ExtResource("1_2221x")
 
 [node name="player 1 cam" type="Camera2D" parent="scrib"]
@@ -945,11 +946,14 @@ position = Vector2(7.579935, -7.7028995)
 scale = Vector2(12, 13.788)
 sprite_frames = SubResource("SpriteFrames_rjqkl")
 animation = &"punch"
-frame_progress = 0.96097785
+frame_progress = 0.7058991
 
 [node name="right hitbox" type="Area2D" parent="scrib"]
 position = Vector2(113.69988, -23.109564)
+collision_layer = 12
+collision_mask = 12
 monitoring = false
+script = ExtResource("17_2yp5d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="scrib/right hitbox"]
 position = Vector2(-45.479527, 30.81282)
@@ -958,6 +962,8 @@ script = ExtResource("17_s1xs0")
 
 [node name="left hitbox" type="Area2D" parent="scrib"]
 position = Vector2(-22.739563, -23.109558)
+collision_layer = 12
+collision_mask = 12
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="scrib/left hitbox"]
@@ -1047,8 +1053,8 @@ tile_set = SubResource("TileSet_4d7sh")
 
 [node name="box" type="RigidBody2D" parent="."]
 position = Vector2(-1133, -420)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1061,8 +1067,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="box2" type="RigidBody2D" parent="."]
 position = Vector2(2050, 142)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1075,8 +1081,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="box3" type="RigidBody2D" parent="."]
 position = Vector2(4476, -753)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1089,8 +1095,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="box4" type="RigidBody2D" parent="."]
 position = Vector2(3678, -313)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1103,8 +1109,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="box5" type="RigidBody2D" parent="."]
 position = Vector2(6250, 159)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1117,8 +1123,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="box6" type="RigidBody2D" parent="."]
 position = Vector2(8040, 203)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1131,8 +1137,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="box7" type="RigidBody2D" parent="."]
 position = Vector2(7520, 296)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1145,8 +1151,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="box8" type="RigidBody2D" parent="."]
 position = Vector2(8033, 170)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1159,8 +1165,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="box9" type="RigidBody2D" parent="."]
 position = Vector2(8045, 139)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 mass = 1000.0
 gravity_scale = 0.75
 
@@ -1173,8 +1179,8 @@ sprite_frames = SubResource("SpriteFrames_kvhqa")
 
 [node name="ball" type="RigidBody2D" parent="."]
 position = Vector2(5558, 213)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 4
 mass = 0.243
 physics_material_override = SubResource("PhysicsMaterial_w7r8c")
 
@@ -1188,8 +1194,8 @@ animation = &"new_animation"
 
 [node name="ball2" type="RigidBody2D" parent="."]
 position = Vector2(-1047, -148)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 4
 mass = 0.243
 physics_material_override = SubResource("PhysicsMaterial_w7r8c")
 
@@ -1203,8 +1209,8 @@ animation = &"new_animation"
 
 [node name="ball3" type="RigidBody2D" parent="."]
 position = Vector2(756, -105)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 4
 mass = 0.243
 physics_material_override = SubResource("PhysicsMaterial_w7r8c")
 
@@ -1224,5 +1230,6 @@ autoplay = true
 max_distance = 1546.0
 attenuation = 0.6372793
 
+[connection signal="body_entered" from="scrib/right hitbox" to="scrib" method="_on_right_hitbox_body_entered"]
 [connection signal="body_entered" from="scrib/left hitbox" to="scrib" method="_on_left_hitbox_body_entered"]
 [connection signal="body_entered" from="chase" to="pixel" method="_on_chase_body_entered"]

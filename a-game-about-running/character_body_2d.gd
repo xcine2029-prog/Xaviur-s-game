@@ -142,15 +142,18 @@ func _physics_process(delta: float) -> void:
 		emitter3.emitting = true
 	
 	if Input.is_action_just_pressed("melee"):
-		if last_direction >= false:
+		if last_direction2 == 200:
 			hitbox_left.monitoring = true
 			await get_tree().create_timer(0.1).timeout
 			hitbox_left.monitoring = false
 		else:
-			if last_direction >= true:
+			if last_direction2 == -200:
 				hitbox_right.monitoring = true
 				await get_tree().create_timer(0.1).timeout
 				hitbox_right.monitoring = false
+				
+	if Input.is_action_just_pressed("sandy"):
+		pass
 	
 	
 		
@@ -197,6 +200,14 @@ func _physics_process(delta: float) -> void:
 				
 	move_and_slide()
 
-
+var launch_force = Vector2(0, -500)
+	
 func _on_left_hitbox_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	print("left hit")
+	if body is RigidBody2D:
+		body.apply_impulse(launch_force)
+
+
+
+func _on_right_hitbox_body_entered(body: Node2D) -> void:
+	print("right hit")
