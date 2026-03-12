@@ -71,16 +71,14 @@ sources/0 = SubResource("TileSetAtlasSource_nlkkf")
 script = ExtResource("1_06t4h")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 357.00003
-offset_top = 86.0
-offset_right = 457.00003
-offset_bottom = 114.0
-scale = Vector2(7.5, 7.5)
+offset_left = 209.00002
+offset_top = 55.00001
+offset_right = 309.0
+offset_bottom = 83.000015
+scale = Vector2(10, 10)
 theme = SubResource("Theme_jix8l")
 theme_override_font_sizes/bold_font_size = 20
-text = "crosseries
-combat
-"
+text = ".Home."
 fit_content = true
 tab_size = 8
 horizontal_alignment = 1

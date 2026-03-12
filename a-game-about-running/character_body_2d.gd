@@ -14,6 +14,13 @@ extends CharacterBody2D
 
 @onready var hitbox_slide: CollisionShape2D = $"slide"
 
+@onready var hitbox_left: Area2D = $"left hitbox"
+
+@onready var hitbox_right: Area2D = $"right hitbox"
+
+
+
+
 
 
 
@@ -56,11 +63,11 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	
-
 		
 # sprint effect.
 	if Input.is_action_pressed("sprint") and velocity.length() > .1 and is_on_floor() and crouching <= 0:
 		emitter.emitting = true
+		print("effect")
 	else:
 		emitter.emitting = false
 		
@@ -80,9 +87,6 @@ func _physics_process(delta: float) -> void:
 		if velocity.x < 0:
 			last_directionv = false
 	
-# sprint.
-
-
 	if Input.is_action_pressed("sprint") and crouching <= 0 and stamina >= 1:
 		sprinting = 1
 		stamina -= delta * stamina_decrease
@@ -137,9 +141,17 @@ func _physics_process(delta: float) -> void:
 		Double_Jump = 0
 		emitter3.emitting = true
 	
+	if Input.is_action_just_pressed("melee"):
+		if last_direction >= false:
+			hitbox_left.monitoring = true
+			await get_tree().create_timer(0.1).timeout
+			hitbox_left.monitoring = false
+		else:
+			if last_direction >= true:
+				hitbox_right.monitoring = true
+				await get_tree().create_timer(0.1).timeout
+				hitbox_right.monitoring = false
 	
-		
-# Handle .
 	
 		
 	
@@ -183,15 +195,8 @@ func _physics_process(delta: float) -> void:
 									animated_sprite.flip_h = last_direction
 				
 				
-		
-	
-		
-	
-		
-	
-	
 	move_and_slide()
 
 
-func _on_kill_area_body_entered(body: Node2D) -> void:
+func _on_left_hitbox_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.

@@ -2,10 +2,11 @@ extends CharacterBody2D
 
 @onready var pp = $"../scrib" 
 @onready var animated_sprite: AnimatedSprite2D = $"AnimatedSprite2D"
+@onready var scary_music: AudioStreamPlayer2D = $"AudioStreamPlayer2D"
 
 
 var SPEED = 405.0
-const JUMP_VELOCITY = -350.0
+const JUMP_VELOCITY = -300.0
 const TURN_DELAY = 0.5
 
 var turn_timer = 0.0
@@ -20,15 +21,16 @@ func _physics_process(delta: float) -> void:
 	var distancey = player_posy - my_posy
 	
 	if abs(distance) > 200:
-		SPEED = 550
+		SPEED = 400
 	else:
-		SPEED = 345
-
+		SPEED = 330
+		
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	var intended_dir = 0
-	if abs(distance) < 1000:
+	if abs(distance) < 1000000:
 		intended_dir = 1 if distance > 0 else -1
 	
 	if abs(distance) < 45 and abs(distancey) < 45:
@@ -80,5 +82,8 @@ func _physics_process(delta: float) -> void:
 					else:
 						animated_sprite.speed_scale = 1
 						animated_sprite.play("idle") 
-
+	
 	move_and_slide()
+	
+func _on_chase_body_entered(body: Node2D) -> void:
+	global_position = Vector2(9126, 562) 
