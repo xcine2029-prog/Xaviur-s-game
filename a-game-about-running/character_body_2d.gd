@@ -18,13 +18,13 @@ extends CharacterBody2D
 
 @onready var hitbox_right: Area2D = $"right hitbox"
 
+@onready var hitsound: AudioStreamPlayer2D = $"hit sound"
 
 
 
+var dash_cooldown = 0
 
-
-
-
+var waiting = 0
 
 var crouch_cam_decrease_rate = 100
 
@@ -39,6 +39,8 @@ var stamina_decrease = 1
 var last_direction2 = 0
 
 var last_direction = 0
+
+var last_direction3 = 0
 
 var last_directionv = 0
 
@@ -76,10 +78,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("left"):
 		last_direction = true
 		last_direction2 = 200
+		last_direction3 = -1
 	
 	if Input.is_action_pressed("right"):
 		last_direction = false
 		last_direction2 = -200
+		last_direction3 = 1
 		
 	if velocity.x > 0:
 		last_directionv = true
@@ -96,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		if stamina < 100:
 			sprint_delay()
 			stamina += delta * stamina_decrease
-		if Input.is_action_pressed("down") and sprinting <= 0 and is_on_floor():
+		if Input.is_action_pressed("down") and sprinting <= 0 and is_on_floor() and waiting == 0:
 			crouching = 1
 			SPEED = 80
 			animated_sprite.speed_scale = 1.5
@@ -123,7 +127,7 @@ func _physics_process(delta: float) -> void:
 		
 			
 	# Handle jump.
-	if Input.is_action_pressed("up") and is_on_wall() and not is_on_floor():
+	if Input.is_action_pressed("up") and is_on_wall() and not is_on_floor() and waiting == 0:
 		var wall_normal = get_wall_normal()
 		velocity.x = wall_normal.x * 280
 		animated_sprite.play("flip") 
@@ -131,88 +135,122 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = last_directionv
 		emitter2.emitting = true
 	else:
-		if Input.is_action_just_pressed("up") and is_on_floor():
+		if Input.is_action_just_pressed("up") and is_on_floor() and waiting == 0:
 			velocity.y = JUMP_VELOCITY 
 			Double_Jump = Double_Jump + 1
 			emitter2.emitting = true
 
-	if Input.is_action_just_pressed("up") and not is_on_floor() and Double_Jump >= 1 and not is_on_wall():
+	if Input.is_action_just_pressed("up") and not is_on_floor() and Double_Jump >= 1 and not is_on_wall() and waiting == 0:
 		velocity.y = JUMP_VELOCITY 
 		Double_Jump = 0
 		emitter3.emitting = true
 	
-	if Input.is_action_just_pressed("melee"):
+	
+	
+	if Input.is_action_just_pressed("melee") and waiting == 0 and is_on_floor():
 		if last_direction2 == 200:
+			waiting = 1
+			animated_sprite.play("punch")
+			await get_tree().create_timer(0.1).timeout
 			hitbox_left.monitoring = true
 			await get_tree().create_timer(0.1).timeout
 			hitbox_left.monitoring = false
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(.2).timeout
+			waiting = 0
 		else:
-			if last_direction2 == -200:
+			if last_direction2 == -200 and waiting == 0:
+				waiting = 1
+				animated_sprite.play("punch")
+				await get_tree().create_timer(0.1).timeout
 				hitbox_right.monitoring = true
 				await get_tree().create_timer(0.1).timeout
 				hitbox_right.monitoring = false
-				await get_tree().create_timer(0.5).timeout
-				
-	if Input.is_action_just_pressed("sandy"):
-		pass
+				await get_tree().create_timer(.2).timeout
+				waiting = 0
+	
+
 	
 	
 		
 	
-	var direction := Input.get_axis("left", "right") 
-	if is_on_floor() and not is_on_wall() and direction and sprinting <= 0 and crouching <= 0:
+	var direction := Input.get_axis("left", "right")
+	if is_on_floor() and not is_on_wall() and direction and sprinting <= 0 and crouching <= 0 and not waiting == 1:
 		velocity.x = direction * SPEED
 		animated_sprite.play("run")
 		animated_sprite.flip_h = direction < 0
 	else:
-		if is_on_floor() and is_on_wall() and direction and sprinting <= 0 and crouching <= 0:
+		if is_on_floor() and is_on_wall() and direction and sprinting <= 0 and crouching <= 0 and not waiting == 1:
 			velocity.x = direction * SPEED
 			animated_sprite.play("wall run")
 			animated_sprite.flip_h = direction < 0
 		else:
-			if is_on_floor() and is_on_wall() and direction and sprinting > 0 and crouching <= 0:
+			if is_on_floor() and is_on_wall() and direction and sprinting > 0 and crouching <= 0 and not waiting == 1:
 				velocity.x = direction * SPEED
 				animated_sprite.play("wall run")
 				animated_sprite.flip_h = direction < 0
 			else:
-				if is_on_floor() and direction and sprinting > 0 and crouching <= 0:
+				if is_on_floor() and direction and sprinting > 0 and crouching <= 0 and not waiting == 1:
 					velocity.x = direction * SPEED
 					animated_sprite.play("sprint")
 					animated_sprite.flip_h = direction < 0
 				else:
-					if is_on_floor() and direction and sprinting <= 0 and crouching > 0:
+					if is_on_floor() and direction and sprinting <= 0 and crouching > 0 and not waiting == 1:
 						velocity.x = direction * SPEED
 						animated_sprite.play("slide")
 						animated_sprite.flip_h = direction < 0
 					else:
-						if not is_on_floor() and velocity.y < 0:
+						if not is_on_floor() and velocity.y < 0 and waiting == 0:
 							animated_sprite.play("air idle")
 						else:
-							if not is_on_floor() and velocity.y > 0:
+							if not is_on_floor() and velocity.y > 0 and waiting == 0:
 								animated_sprite.play("fall")
 							else:
-								if Input.is_action_pressed("down") and is_on_floor() and velocity.x <= .1 and velocity.x >= -.1:
+								if Input.is_action_pressed("down") and is_on_floor() and velocity.x <= .1 and velocity.x >= -.1 and not waiting == 1:
 									animated_sprite.play("crouch")
 								else:
-									velocity.x = move_toward(velocity.x, 0, SPEED) 
-									animated_sprite.play("idle")
-									animated_sprite.flip_h = last_direction
+									if waiting == 1:
+										velocity.x = move_toward(velocity.x, 0, SPEED) 
+										animated_sprite.flip_h = last_direction
+									elif waiting == 0:
+										animated_sprite.play("idle")
+										velocity.x = move_toward(velocity.x, 0, SPEED) 
+										animated_sprite.flip_h = last_direction
 				
-				
+	
+	
+	
+	if Input.is_action_just_pressed("sandy") and dash_cooldown == 0:
+		velocity.x = (velocity.x * 1.5 )
+		velocity.y = JUMP_VELOCITY / 2
+		animated_sprite.flip_h = direction < 0
+		dash_cooldown = 1
+		animated_sprite.play("dash")
+		waiting = 1
+		await get_tree().create_timer(.3).timeout
+		waiting = 0
+		await get_tree().create_timer(1).timeout
+		dash_cooldown = 0
+
+	
+	
+	
+	
+	
 	move_and_slide()
 
-var l_launch_force = Vector2(-100000, -100000)
-var r_launch_force = Vector2(100000, -100000)
+var l_launch_force = Vector2(-200000, -100000)
+var r_launch_force = Vector2(200000, -100000)
 	
 func _on_left_hitbox_body_entered(body: Node2D) -> void:
 	print("left hit")
 	if body is RigidBody2D:
-		body.apply_impulse(launch_force)
+		body.apply_impulse(l_launch_force)
+		hitsound.play()
 
 
 
 func _on_right_hitbox_body_entered(body: Node2D) -> void:
 	print("right hit")
 	if body is RigidBody2D:
-		body.apply_impulse(launch_force)
+		body.apply_impulse(r_launch_force)
+		hitsound.play()
