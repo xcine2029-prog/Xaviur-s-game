@@ -20,6 +20,10 @@ extends CharacterBody2D
 
 @onready var hitsound: AudioStreamPlayer2D = $"hit sound"
 
+@onready var gun_eff: CPUParticles2D = $"shotgun eff"
+
+@onready var gun_eff2: CPUParticles2D = $"shotgun eff2"
+
 
 
 var dash_cooldown = 0
@@ -151,7 +155,11 @@ func _physics_process(delta: float) -> void:
 		if last_direction2 == 200:
 			waiting = 1
 			animated_sprite.play("punch")
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(.7).timeout
+			gun_eff.scale.x = -1
+			gun_eff.emitting = true
+			gun_eff2.scale.x = -1
+			gun_eff2.emitting = true
 			hitbox_left.monitoring = true
 			await get_tree().create_timer(0.1).timeout
 			hitbox_left.monitoring = false
@@ -161,7 +169,11 @@ func _physics_process(delta: float) -> void:
 			if last_direction2 == -200 and waiting == 0:
 				waiting = 1
 				animated_sprite.play("punch")
-				await get_tree().create_timer(0.1).timeout
+				await get_tree().create_timer(.7).timeout
+				gun_eff.scale.x = 1
+				gun_eff.emitting = true
+				gun_eff2.scale.x = 1
+				gun_eff2.emitting = true
 				hitbox_right.monitoring = true
 				await get_tree().create_timer(0.1).timeout
 				hitbox_right.monitoring = false
