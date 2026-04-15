@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://byvtwaj5jg357" path="res://fonts/BridgeParapet.ttf" id="3_fu7sn"]
 [ext_resource type="Script" uid="uid://iieacw3kggsc" path="res://static_body_2d.gd" id="3_glbon"]
 [ext_resource type="Texture2D" uid="uid://c2h5rt4iic08q" path="res://sprites/human.png" id="4_nlkkf"]
-[ext_resource type="AudioStream" uid="uid://bnfrwtljdebk8" path="res://a humans theme.mp3" id="6_nlkkf"]
+[ext_resource type="AudioStream" uid="uid://bnfrwtljdebk8" path="res://sfx/a humans theme.mp3" id="6_nlkkf"]
 
 [sub_resource type="Theme" id="Theme_jix8l"]
 default_font = ExtResource("3_fu7sn")
@@ -70,7 +70,9 @@ sources/0 = SubResource("TileSetAtlasSource_nlkkf")
 [node name="main menu" type="Node2D"]
 script = ExtResource("1_06t4h")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 209.00002
 offset_top = 55.00001
 offset_right = 309.0
@@ -83,7 +85,7 @@ fit_content = true
 tab_size = 8
 horizontal_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 458.00006
 offset_top = 415.00003
 offset_right = 558.00006
@@ -96,27 +98,28 @@ fit_content = true
 tab_size = 8
 horizontal_alignment = 1
 
-[node name="guy" type="CharacterBody2D" parent="."]
+[node name="guy" type="CharacterBody2D" parent="CanvasLayer"]
 position = Vector2(25, 567)
 script = ExtResource("3_glbon")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="guy"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CanvasLayer/guy"]
 position = Vector2(678, -231.00002)
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_0k4wn")
 animation = &"new_animation"
 
-[node name="wait1" type="Timer" parent="guy"]
+[node name="wait1" type="Timer" parent="CanvasLayer/guy"]
 wait_time = 5.0
 autostart = true
 
-[node name="button manager" type="Control" parent="."]
+[node name="button manager" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
-[node name="start" type="Button" parent="button manager"]
+[node name="start" type="Button" parent="CanvasLayer/button manager"]
 layout_mode = 0
 offset_left = 186.0
 offset_top = 148.00002
@@ -125,8 +128,9 @@ offset_bottom = 182.0364
 scale = Vector2(2.1541967, 3.4668767)
 text = "start
 "
+metadata/_edit_use_anchors_ = true
 
-[node name="controls" type="Button" parent="button manager"]
+[node name="controls" type="Button" parent="CanvasLayer/button manager"]
 layout_mode = 0
 offset_left = 183.0
 offset_top = 289.0
@@ -135,8 +139,9 @@ offset_bottom = 320.0
 scale = Vector2(2.9534416, 4.0183883)
 text = "controls"
 icon_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="quit" type="Button" parent="button manager"]
+[node name="quit" type="Button" parent="CanvasLayer/button manager"]
 layout_mode = 0
 offset_left = 176.0
 offset_top = 457.0
@@ -144,8 +149,9 @@ offset_right = 227.60133
 offset_bottom = 504.24908
 scale = Vector2(4.1859384, 2.6878822)
 text = "quit"
+metadata/_edit_use_anchors_ = true
 
-[node name="TileMap" type="TileMap" parent="button manager"]
+[node name="TileMap" type="TileMap" parent="CanvasLayer/button manager"]
 position = Vector2(228.00003, 145)
 scale = Vector2(7.5, 7.5)
 tile_set = SubResource("TileSet_jix8l")
@@ -153,7 +159,7 @@ rendering_quadrant_size = 32
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 0)
 
-[node name="TileMap2" type="TileMap" parent="button manager"]
+[node name="TileMap2" type="TileMap" parent="CanvasLayer/button manager"]
 position = Vector2(228.00003, 295.00003)
 scale = Vector2(7.5, 7.5)
 tile_set = SubResource("TileSet_jix8l")
@@ -161,7 +167,7 @@ rendering_quadrant_size = 32
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 131072, 0)
 
-[node name="TileMap3" type="TileMap" parent="button manager"]
+[node name="TileMap3" type="TileMap" parent="CanvasLayer/button manager"]
 position = Vector2(225, 459.00003)
 scale = Vector2(7.5, 7.5)
 tile_set = SubResource("TileSet_jix8l")
@@ -169,16 +175,16 @@ rendering_quadrant_size = 32
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 2)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 position = Vector2(542, 343)
 zoom = Vector2(1.2, 1.2)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer"]
 stream = ExtResource("6_nlkkf")
 volume_db = 0.7
 autoplay = true
 
-[connection signal="timeout" from="guy/wait1" to="guy" method="_on_wait_1_timeout"]
-[connection signal="pressed" from="button manager/start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="button manager/controls" to="." method="_on_controls_pressed"]
-[connection signal="pressed" from="button manager/quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="CanvasLayer/guy/wait1" to="CanvasLayer/guy" method="_on_wait_1_timeout"]
+[connection signal="pressed" from="CanvasLayer/button manager/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/button manager/controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="CanvasLayer/button manager/quit" to="." method="_on_quit_pressed"]

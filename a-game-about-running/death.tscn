@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6qphyj5pya7u" path="res://death screen.gd" id="1_531me"]
 [ext_resource type="Texture2D" uid="uid://dtihte7hquxhw" path="res://sprites/NEW BUTTONS.png" id="2_531me"]
-[ext_resource type="AudioStream" uid="uid://div27opr0htco" path="res://HOME.mp3" id="2_4868a"]
+[ext_resource type="AudioStream" uid="uid://div27opr0htco" path="res://sfx/HOME.mp3" id="2_4868a"]
 [ext_resource type="Texture2D" uid="uid://bnv3q8k57g707" path="res://sprites/NEW BUTTONS 2.png" id="3_4868a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_531me"]
@@ -91,6 +91,6 @@ zoom = Vector2(1.2, 1.2)
 
 [connection signal="pressed" from="button manager/restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="button manager/restart" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="button manager/main menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="button manager/main menu" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="button manager/main menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="button manager/quit" to="." method="_on_quit_pressed"]

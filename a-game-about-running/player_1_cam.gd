@@ -15,6 +15,6 @@ func _process(delta: float) -> void:
 		zoom = zoom + Vector2(.5,.5)
 		position_smoothing_speed = position_smoothing_speed + .5
 		
-	if Input.is_action_just_pressed("zoom out") and zoom >= Vector2(.5,.5) :
+	if Input.is_action_just_pressed("zoom out") and zoom >= Vector2(1,1) :
 		zoom = zoom - Vector2(.5,.5)
 		position_smoothing_speed = position_smoothing_speed + .5

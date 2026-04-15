@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d1i08ub3jykra" path="res://controlls.gd" id="1_e5r78"]
 [ext_resource type="FontFile" uid="uid://b5y0urw48m3ho" path="res://fonts/Kenney Pixel.ttf" id="1_o4hj3"]
 [ext_resource type="Texture2D" uid="uid://dtihte7hquxhw" path="res://sprites/NEW BUTTONS.png" id="2_bef2c"]
-[ext_resource type="AudioStream" uid="uid://c3xcucf8fw3x4" path="res://input or something.mp3" id="3_bef2c"]
+[ext_resource type="AudioStream" uid="uid://c3xcucf8fw3x4" path="res://sfx/input or something.mp3" id="3_bef2c"]
 [ext_resource type="Texture2D" uid="uid://bnv3q8k57g707" path="res://sprites/NEW BUTTONS 2.png" id="3_jnre0"]
 
 [sub_resource type="Theme" id="Theme_t6b0w"]
