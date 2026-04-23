@@ -34,6 +34,10 @@ extends CharacterBody2D
 
 @onready var lledge: Area2D = $"l-ledge"
 
+@onready var hitbox_sleft: Area2D = $"lsword"
+
+@onready var hitbox_sright: Area2D = $"rsword"
+
 
 
 
@@ -156,7 +160,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	if Input.is_action_just_pressed("melee") and waiting == 0 and is_on_floor():
+	if Input.is_action_just_pressed("shoot") and waiting == 0 and is_on_floor():
 			waiting = 1
 			animated_sprite.play("shoot")
 			gun_sfx1.play()
@@ -251,17 +255,25 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	if Input.is_action_just_pressed("sandy") and dash_cooldown == 0:
-		velocity.x = (velocity.x * 1.5 )
-		velocity.y = JUMP_VELOCITY / 2
-		animated_sprite.flip_h = direction < 0
-		dash_cooldown = 1
-		animated_sprite.play("dash")
-		waiting = 1
-		await get_tree().create_timer(.3).timeout
-		waiting = 0
-		await get_tree().create_timer(1).timeout
-		dash_cooldown = 0
+	if Input.is_action_just_pressed("swing") and waiting == 0 and is_on_floor():
+			waiting = 1
+			animated_sprite.play("standing swing")
+			velocity.x = direction * 200
+			await get_tree().create_timer(.2).timeout
+			if last_direction2 == 200:
+				hitbox_sleft.monitoring = true
+				await get_tree().create_timer(0.1).timeout
+				hitbox_sleft.monitoring = false
+				await get_tree().create_timer(.1).timeout
+				waiting = 0
+			elif last_direction2 == -200:
+				hitbox_sright.monitoring = true
+				await get_tree().create_timer(0.1).timeout
+				hitbox_sright.monitoring = false
+				await get_tree().create_timer(.1).timeout
+				waiting = 0
+			else :
+				waiting = 0
 	
 	
 	if climbing == 1 :

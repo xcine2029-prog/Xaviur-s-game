@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://cfvfe4jst1nnx"]
 
-[ext_resource type="Script" uid="uid://bpn5e4rh65eg3" path="res://character_body_2d_2.gd" id="1_eseir"]
+[ext_resource type="Script" uid="uid://54hojrvwv8es" path="res://zombie script.gd" id="1_eseir"]
 [ext_resource type="Texture2D" uid="uid://22ahr1ytii53" path="res://sprites/zombie climb _ fall.png" id="2_7nqyo"]
 [ext_resource type="Texture2D" uid="uid://dp7hx4f1lwbs2" path="res://sprites/zombie.png" id="3_lnshm"]
 [ext_resource type="AudioStream" uid="uid://dmv1k4jbjtvoj" path="res://sfx/dragon-studio-zombie-sound-357975.mp3" id="4_x5rsa"]
@@ -61,7 +61,7 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("3_lnshm")
 region = Rect2(64, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_mryly"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_7nqyo"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -163,15 +163,14 @@ one_way_collision_margin = 88.5
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, 6)
 scale = Vector2(1.8, 1.757)
-sprite_frames = SubResource("SpriteFrames_mryly")
+sprite_frames = SubResource("SpriteFrames_7nqyo")
 animation = &"climb"
-frame_progress = 0.5566745
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(0, 12)
-amount = 50
+position = Vector2(0, 9)
+amount = 10
 lifetime = 0.45
-speed_scale = 0.5
+speed_scale = 0.6
 randomness = 1.0
 collision_base_size = 0.0
 trail_lifetime = 0.1

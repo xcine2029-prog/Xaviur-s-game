@@ -25,15 +25,13 @@ func _physics_process(delta: float) -> void:
 	else:
 		SPEED = 90
 		
-	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	var intended_dir = 0
 	if abs(distance) < 500:
 		intended_dir = 1 if distance > 0 else -1
-	
-	if abs(distance) < 10 and abs(distancey) < 10:
+	if abs(distance) < 15 and abs(distancey) < 15 :
 		var _reload = get_tree().reload_current_scene()
 		
 		
@@ -60,10 +58,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	
-	if pp.global_position.y > position.y and abs(distance) < 500 and is_on_floor():
+	var jumping = 0
+	if  abs(distancey) > 15 and abs(distance) < 500 and is_on_floor() and jumping == 0:
+		jumping = 1
+		await get_tree().create_timer(.05).timeout
 		velocity.y = -300
-
+		jumping = 0
 	# Animation Logic
 	if is_on_wall():
 		velocity.y = JUMP_VELOCITY

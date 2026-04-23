@@ -40,7 +40,9 @@ sources/1 = SubResource("TileSetAtlasSource_eeplm")
 [node name="controlls" type="Node2D"]
 script = ExtResource("1_e5r78")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_right = 200.0
 offset_bottom = 30.0
 scale = Vector2(5.755, 5.755)
@@ -50,12 +52,12 @@ fit_content = true
 tab_size = 8
 horizontal_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 171.0
-offset_top = 99.0
-offset_right = 371.0
-offset_bottom = 207.0
-scale = Vector2(4, 4)
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 193.0
+offset_top = 87.0
+offset_right = 447.0
+offset_bottom = 243.0
+scale = Vector2(3, 3)
 theme = SubResource("Theme_t6b0w")
 text = "left = a
 right = d
@@ -64,18 +66,21 @@ crouch  = s
 zoom = z
 zoom out = x
 sprint = shift
+e = shotgun
+q = slash
 
-tip: hold w against a wall to wall jump"
+
+tip: hold w against a wall to climb"
 fit_content = true
 tab_size = 8
 horizontal_alignment = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="RichTextLabel2"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer/RichTextLabel2"]
 stream = ExtResource("3_bef2c")
 volume_db = 0.7
 autoplay = true
 
-[node name="button manager" type="Control" parent="."]
+[node name="button manager" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 432.0
@@ -83,7 +88,7 @@ offset_top = 358.0
 offset_right = 472.0
 offset_bottom = 398.0
 
-[node name="back to menu" type="Button" parent="button manager"]
+[node name="back to menu" type="Button" parent="CanvasLayer/button manager"]
 layout_mode = 0
 offset_left = -397.0
 offset_top = -314.0
@@ -93,7 +98,7 @@ scale = Vector2(2.9534416, 4.0183883)
 text = "controls"
 icon_alignment = 1
 
-[node name="TileMap" type="TileMap" parent="button manager/back to menu"]
+[node name="TileMap" type="TileMap" parent="CanvasLayer/button manager/back to menu"]
 position = Vector2(15.57505, -0.497715)
 scale = Vector2(2.53941, 1.8664197)
 tile_set = SubResource("TileSet_6i6nt")
@@ -101,4 +106,4 @@ rendering_quadrant_size = 32
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 131073, 0)
 
-[connection signal="pressed" from="button manager/back to menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/button manager/back to menu" to="." method="_on_back_to_menu_pressed"]

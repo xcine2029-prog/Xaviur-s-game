@@ -20,8 +20,8 @@ func _physics_process(delta: float) -> void:
 	var distance = player_pos - my_pos
 	var distancey = player_posy - my_posy
 	
-	if abs(distance) > 200:
-		SPEED = 100
+	if abs(distance) > 20000:
+		SPEED = 200
 	else:
 		SPEED = 90
 		
@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	
-	if pp.global_position.y > position.y and abs(distance) < 500 and is_on_floor():
+	if pp.global_position.y > 50 + position.y and abs(distance) < 500 and is_on_floor():
 		velocity.y = -300
 
 	# Animation Logic

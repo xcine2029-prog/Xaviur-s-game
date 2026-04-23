@@ -73,14 +73,15 @@ script = ExtResource("1_06t4h")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 209.00002
-offset_top = 55.00001
-offset_right = 309.0
-offset_bottom = 83.000015
+offset_left = 225.0
+offset_top = 52.000008
+offset_right = 325.0
+offset_bottom = 80.00001
 scale = Vector2(10, 10)
 theme = SubResource("Theme_jix8l")
 theme_override_font_sizes/bold_font_size = 20
-text = ".Home."
+text = "isolation
+"
 fit_content = true
 tab_size = 8
 horizontal_alignment = 1
