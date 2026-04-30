@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://cw6ncdi86oqf3"]
+[gd_scene load_steps=83 format=3 uid="uid://cw6ncdi86oqf3"]
 
 [ext_resource type="Script" uid="uid://brqqsao6rr4ly" path="res://player script.gd" id="1_vpg5d"]
 [ext_resource type="Script" uid="uid://dkfkucge88ra7" path="res://player_1_cam.gd" id="2_6yea2"]
@@ -29,8 +29,8 @@ radius = 53.05957
 height = 154.06348
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6yea2"]
-radius = 53.059944
-height = 123.25101
+radius = 46.219128
+height = 107.844635
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ir8iy"]
 
@@ -489,6 +489,9 @@ colors = PackedColorArray(0.85606754, 0.85606724, 0.856067, 1, 0.64705884, 0.647
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0w78"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rbf3"]
+size = Vector2(68.48023, 271.151)
+
 [node name="human" type="CharacterBody2D"]
 scale = Vector2(0.13192625, 0.12981638)
 collision_mask = 5
@@ -712,9 +715,19 @@ position = Vector2(-53.05995, 23.109573)
 scale = Vector2(1.8817091, 0.76704895)
 shape = SubResource("RectangleShape2D_x0w78")
 
+[node name="climbing check" type="Area2D" parent="."]
+position = Vector2(15.1599865, -123.25101)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="climbing check"]
+position = Vector2(-15.159988, 123.25101)
+scale = Vector2(1.8817091, 0.76704895)
+shape = SubResource("RectangleShape2D_1rbf3")
+
 [connection signal="body_entered" from="right hitbox" to="." method="_on_right_hitbox_body_entered"]
 [connection signal="body_entered" from="left hitbox" to="." method="_on_left_hitbox_body_entered"]
 [connection signal="body_entered" from="rsword" to="." method="_on_right_hitbox_body_entered"]
 [connection signal="body_entered" from="lsword" to="." method="_on_left_hitbox_body_entered"]
 [connection signal="body_exited" from="r-ledge" to="." method="_on_rledge_body_exited"]
 [connection signal="body_exited" from="l-ledge" to="." method="_on_lledge_body_exited"]
+[connection signal="body_entered" from="climbing check" to="." method="_on_climbing_check_body_entered"]

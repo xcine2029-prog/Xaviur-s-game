@@ -14,6 +14,8 @@ extends CharacterBody2D
 
 @onready var hitbox_slide: CollisionShape2D = $"slide"
 
+@onready var hitbox_vault: CollisionShape2D = $"vault"
+
 @onready var hitbox_left: Area2D = $"left hitbox"
 
 @onready var hitbox_right: Area2D = $"right hitbox"
@@ -108,6 +110,20 @@ func _physics_process(delta: float) -> void:
 	else:
 		if velocity.x < 0:
 			last_directionv = false
+			
+	if vault == 1:
+		hitbox_slide.disabled = true
+		hitbox_base.disabled = true
+		hitbox_vault.disabled = false
+	elif crouching == 1:
+		hitbox_slide.disabled = false
+		hitbox_base.disabled = true
+		hitbox_vault.disabled = true
+	else:
+		hitbox_slide.disabled = true
+		hitbox_base.disabled = false
+		hitbox_vault.disabled = true
+		
 	
 	if Input.is_action_pressed("sprint") and crouching <= 0 and waiting == 0:
 		sprinting = 1
@@ -122,8 +138,6 @@ func _physics_process(delta: float) -> void:
 			crouching = 1
 			SPEED = 80
 			animated_sprite.speed_scale = 1.5
-			hitbox_slide.disabled = false
-			hitbox_base.disabled = true
 			camera.offset.y += delta * crouch_cam_decrease_rate
 			if camera.offset.y >= 20:
 				crouch_cam_decrease_rate = 0
@@ -131,15 +145,10 @@ func _physics_process(delta: float) -> void:
 			if camera.offset.y >= 0:
 				crouch_cam_decrease_rate = 100
 				camera.offset.y -= delta * crouch_cam_decrease_rate
-				
-				
 			crouching = 0
 			sprinting = 0
 			SPEED = 100
-			animated_sprite.speed_scale = 1
-			if vault == 0:
-				hitbox_slide.disabled = true
-				hitbox_base.disabled = false
+
 	
 	if is_on_floor():
 		Double_Jump = 0

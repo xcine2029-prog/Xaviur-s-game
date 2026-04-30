@@ -39,7 +39,7 @@ extends CharacterBody2D
 @onready var hitbox_sright: Area2D = $"rsword"
 
 
-
+var climbtrue = 0
 
 var dash_cooldown = 0
 
@@ -357,5 +357,7 @@ func _on_lledge_body_exited(body: Node2D) -> void:
 			waiting = 0
 			vault = 0
 	
-	
-	
+
+
+func _on_climbing_check_body_entered(body: Node2D) -> void:
+	var climbtrue = 1

@@ -1,10 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckargkj3ivooh"]
+[gd_scene load_steps=14 format=3 uid="uid://ckargkj3ivooh"]
 
 [ext_resource type="Script" uid="uid://c2h2yd5v0yf1w" path="res://start.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://dtihte7hquxhw" path="res://sprites/NEW BUTTONS.png" id="2_fu7sn"]
 [ext_resource type="FontFile" uid="uid://byvtwaj5jg357" path="res://fonts/BridgeParapet.ttf" id="3_fu7sn"]
 [ext_resource type="Script" uid="uid://iieacw3kggsc" path="res://static_body_2d.gd" id="3_glbon"]
 [ext_resource type="Texture2D" uid="uid://c2h5rt4iic08q" path="res://sprites/human.png" id="4_nlkkf"]
+[ext_resource type="FontFile" uid="uid://b5y0urw48m3ho" path="res://fonts/Kenney Pixel.ttf" id="5_nlkkf"]
 [ext_resource type="AudioStream" uid="uid://bnfrwtljdebk8" path="res://sfx/a humans theme.mp3" id="6_nlkkf"]
 
 [sub_resource type="Theme" id="Theme_jix8l"]
@@ -51,21 +51,8 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nlkkf"]
-texture = ExtResource("2_fu7sn")
-0:0/size_in_atlas = Vector2i(2, 2)
-0:0/0 = 0
-2:0/size_in_atlas = Vector2i(2, 2)
-2:0/0 = 0
-0:2/size_in_atlas = Vector2i(2, 2)
-0:2/0 = 0
-2:2/size_in_atlas = Vector2i(2, 2)
-2:2/0 = 0
-0:4/size_in_atlas = Vector2i(2, 2)
-0:4/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_jix8l"]
-sources/0 = SubResource("TileSetAtlasSource_nlkkf")
+[sub_resource type="Theme" id="Theme_qe12f"]
+default_font_size = 15
 
 [node name="main menu" type="Node2D"]
 script = ExtResource("1_06t4h")
@@ -73,10 +60,10 @@ script = ExtResource("1_06t4h")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 225.0
-offset_top = 52.000008
-offset_right = 325.0
-offset_bottom = 80.00001
+offset_left = 515.0
+offset_top = 95.0
+offset_right = 562.3
+offset_bottom = 109.9
 scale = Vector2(10, 10)
 theme = SubResource("Theme_jix8l")
 theme_override_font_sizes/bold_font_size = 20
@@ -127,6 +114,9 @@ offset_top = 148.00002
 offset_right = 282.55573
 offset_bottom = 182.0364
 scale = Vector2(2.1541967, 3.4668767)
+theme = SubResource("Theme_qe12f")
+theme_override_fonts/font = ExtResource("5_nlkkf")
+theme_override_font_sizes/font_size = 32
 text = "start
 "
 metadata/_edit_use_anchors_ = true
@@ -138,43 +128,27 @@ offset_top = 289.0
 offset_right = 255.0
 offset_bottom = 320.0
 scale = Vector2(2.9534416, 4.0183883)
+theme_override_fonts/font = ExtResource("5_nlkkf")
+theme_override_font_sizes/font_size = 16
 text = "controls"
 icon_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="quit" type="Button" parent="CanvasLayer/button manager"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = -0.59999925
+anchor_right = 0.2
+anchor_bottom = -0.59999925
 offset_left = 176.0
 offset_top = 457.0
 offset_right = 227.60133
 offset_bottom = 504.24908
 scale = Vector2(4.1859384, 2.6878822)
+theme_override_fonts/font = ExtResource("3_fu7sn")
 text = "quit"
 metadata/_edit_use_anchors_ = true
-
-[node name="TileMap" type="TileMap" parent="CanvasLayer/button manager"]
-position = Vector2(228.00003, 145)
-scale = Vector2(7.5, 7.5)
-tile_set = SubResource("TileSet_jix8l")
-rendering_quadrant_size = 32
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 0, 0)
-
-[node name="TileMap2" type="TileMap" parent="CanvasLayer/button manager"]
-position = Vector2(228.00003, 295.00003)
-scale = Vector2(7.5, 7.5)
-tile_set = SubResource("TileSet_jix8l")
-rendering_quadrant_size = 32
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 131072, 0)
-
-[node name="TileMap3" type="TileMap" parent="CanvasLayer/button manager"]
-position = Vector2(225, 459.00003)
-scale = Vector2(7.5, 7.5)
-tile_set = SubResource("TileSet_jix8l")
-rendering_quadrant_size = 32
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 0, 2)
 
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 position = Vector2(542, 343)
